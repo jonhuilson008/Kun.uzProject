@@ -14,21 +14,26 @@ public class ArticleTypeController {
     @Autowired
     private ArticleTypeService articleTypeService;
 
-    @PostMapping(value = "/create")
+    @PostMapping(value = "/admin/create1")
     public ResponseEntity<?> create(@RequestBody ArticleTypeDTO articleType) {
         ArticleTypeDTO response = articleTypeService.create(articleType);
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping(value = "/update/{id}")
+    @PutMapping(value = "/admin/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Integer id, @RequestBody ArticleTypeDTO articleType) {
         return ResponseEntity.ok(articleTypeService.update(id, articleType));
     }
 
-    @GetMapping("/byLang")
+    @GetMapping("/admin/byLang")
     public ResponseEntity<?> getByLang(@RequestParam Language lang){
         List<ArticleTypeDTO> response = articleTypeService.getByLang(lang);
         return ResponseEntity.ok(response);
 
     }
+    @DeleteMapping(value = "/admin/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(articleTypeService.delete(id));
+    }
+
 }

@@ -1,17 +1,19 @@
 package com.example.service;
 
 import com.example.dto.ArticleTypeDTO;
-import com.example.dto.RegionDTO;
-import com.example.entity.ArticleEntity;
+
+
 import com.example.entity.ArticleTypeEntity;
 import com.example.enums.Language;
 import com.example.exps.AppBadRequestException;
 import com.example.exps.RegionAlreadyExsistException;
 import com.example.repository.ArticleTypeRepository;
+import com.example.repository.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -67,8 +69,29 @@ public class ArticleTypeService {
     public ArticleTypeEntity get(Integer id) {
         Optional<ArticleTypeEntity> optional = articleTypeRepository.findById(id);
         if (optional.isEmpty()) {
-            throw new AppBadRequestException("ArticleType not found: " + id);
+            throw new AppBadRequestException("region not found: " + id);
         }
         return optional.get();
     }
+    public List<ArticleTypeDTO> getAll() {
+        Iterable<ArticleTypeEntity> iterable = articleTypeRepository.findAll();
+        List<ArticleTypeDTO> dtoList = new LinkedList<>();
+
+        iterable.forEach(entity -> {
+            ArticleTypeDTO dto = new ArticleTypeDTO();
+            dto.setEng(entity.getNameEn());
+            dto.setRu(entity.getNameRu());
+            dto.setUz(entity.getNameUz());
+            dto.setVisible(entity.getVisible());
+            dtoList.add(dto);
+        });
+        return dtoList;
+    }
+
+    public boolean delete(Integer id) {
+        ArticleTypeEntity entity = get(id);
+        articleTypeRepository.delete(entity);
+        return true;
+    }
+
 }

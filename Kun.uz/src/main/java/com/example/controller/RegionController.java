@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.dto.CategoryDTO;
 import com.example.dto.RegionDTO;
 import com.example.enums.Language;
 import com.example.service.RegionService;
@@ -41,5 +42,6 @@ public class RegionController {
         List<RegionDTO> list = regionService.getAll();
         return ResponseEntity.ok(list);
     }
+
 
 }

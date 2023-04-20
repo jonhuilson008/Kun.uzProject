@@ -1,23 +1,35 @@
-### Create articleType
-POST localhost:8080/api/v1/articleType/create
+### Create article type
+POST localhost:8080/api/v1/articleType/admin/create1
 Content-Type:  application/json
 
 {
-  "uz": "uz maqola",
-  "ru": "ruscha maqola",
-  "eng": "english article",
+
+  "uz": "Toshkent",
+  "ru": "oblas",
+  "eng": "Tash",
   "visible": true
 
 }
+
+### get all  byLang article Type
+GET localhost:8080/api/v1/articleType/admin/create1
 
 ### update articleType
-PUT localhost:8080/api/v1/articleType/update/1
+PUT localhost:8080/api/v1/articleType/admin/update/2
 Content-Type:  application/json
 
 {
-  "uz": "v",
-  "ru": "ob",
-  "eng": "reg",
+  "uz": "qarshi",
+  "ru": "oblas",
+  "eng": "region",
   "visible": true
 
 }
+
+
+### delete articleType
+DELETE localhost:8080/api/v1/articleType/admin/delete/2
+
+
+### get by lang articleType
+GET localhost:8080/api/v1/region/admin/byLang?lang=name_uz

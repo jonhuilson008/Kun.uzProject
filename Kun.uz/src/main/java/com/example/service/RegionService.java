@@ -1,7 +1,9 @@
 package com.example.service;
 
+import com.example.dto.CategoryDTO;
 import com.example.dto.ProfileDTO;
 import com.example.dto.RegionDTO;
+import com.example.entity.CategoryEntity;
 import com.example.entity.RegionEntity;
 import com.example.enums.Language;
 import com.example.exps.AppBadRequestException;
@@ -9,12 +11,19 @@ import com.example.exps.ItemNotFoundException;
 import com.example.exps.RegionAlreadyExsistException;
 import com.example.repository.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+
+import static com.example.enums.Language.*;
 
 @Service
 public class RegionService {
@@ -50,12 +59,6 @@ public class RegionService {
         return dto;
     }
 
-
-    public List<RegionDTO> getByLang(Language lang) {
-
-        return null;
-    }
-
     public boolean update(Integer id, RegionDTO dto) {
         RegionEntity entity = get(id);
         entity.setVisible(dto.getVisible());
@@ -87,25 +90,27 @@ public class RegionService {
         });
         return dtoList;
     }
-//     public List<CourseDTO> getAll() {
-//        Iterable<CourseEntity> iterable = courseRepository.findAll();
-//        List<CourseDTO> dtoList = new LinkedList<>();
-//
-//        iterable.forEach(entity -> {
-//            CourseDTO dto = new CourseDTO();
-//            dto.setId(entity.getId());
-//            dto.setName(entity.getName());
-//            dto.setPrice(entity.getPrice());
-//            dto.setDuration(entity.getDuration());
-//            dtoList.add(dto);
-//        });
-//        return dtoList;
-//    }
 
     public boolean delete(Integer id) {
         RegionEntity entity = get(id);
         regionRepository.delete(entity);
         return true;
+    }
+
+    public List<RegionDTO> getByLang(Language lang) {
+        List<RegionEntity> entityList = regionRepository.findAllByVisibleTrue();
+        List<RegionDTO> dtoList = new ArrayList<>();
+        for (RegionEntity entity : entityList) {
+            RegionDTO dto = new RegionDTO();
+            dto.setId(entity.getId());
+            switch (lang) {
+                case name_uz -> dto.setUz(entity.getNameUz());
+                case name_en -> dto.setEng(entity.getNameRu());
+                case name_ru -> dto.setRu(entity.getNameEn());
+            }
+            dtoList.add(dto);
+        }
+        return dtoList;
     }
 
 }
