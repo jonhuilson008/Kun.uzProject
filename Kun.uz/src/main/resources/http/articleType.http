@@ -1,0 +1,23 @@
+### Create articleType
+POST localhost:8080/api/v1/articleType/create
+Content-Type:  application/json
+
+{
+  "uz": "uz maqola",
+  "ru": "ruscha maqola",
+  "eng": "english article",
+  "visible": true
+
+}
+
+### update articleType
+PUT localhost:8080/api/v1/articleType/update/1
+Content-Type:  application/json
+
+{
+  "uz": "v",
+  "ru": "ob",
+  "eng": "reg",
+  "visible": true
+
+}

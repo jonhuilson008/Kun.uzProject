@@ -8,7 +8,6 @@ import lombok.Setter;
 @Setter
 public class RegionDTO {
     private Integer id;
-    private String key;
     private String uz;
     private String ru;
     private String eng;
