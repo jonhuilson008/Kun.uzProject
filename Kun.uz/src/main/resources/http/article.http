@@ -1,0 +1,18 @@
+### Create article
+POST localhost:8080/api/v1/article
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI3ODczMDIsImlkIjo0LCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNjgyODczNzAyLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.id8XiiDf_x125GVu4N4kIkQrNwImPfM0Pf-M6PWNeUTOy-iysBvNF0g9wU7LFChgDMu2mNrZKCTcuMwL5WZCOQ
+
+{
+  "title": "title5",
+  "description": "dasdasdasdas5",
+  "content": "dasda sdasdasdasd",
+  "attachId": "b69fa10f-4a30-4d6f-aa77-63db391a41be",
+  "regionId": 2,
+  "categoryId": 2,
+  "articleTypeId": 2
+}
+
+
+### Get 5 article by type id
+GET localhost:8080/api/v1/article/type/1/five

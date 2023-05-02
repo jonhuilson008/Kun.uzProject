@@ -1,70 +1,42 @@
 package com.example.service;
 
-import com.example.dto.CategoryDTO;
-import com.example.dto.ProfileDTO;
 import com.example.dto.RegionDTO;
-import com.example.entity.CategoryEntity;
 import com.example.entity.RegionEntity;
-import com.example.enums.Language;
-import com.example.exps.AppBadRequestException;
 import com.example.exps.ItemNotFoundException;
-import com.example.exps.RegionAlreadyExsistException;
 import com.example.repository.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-
-import static com.example.enums.Language.*;
 
 @Service
 public class RegionService {
     @Autowired
     private RegionRepository regionRepository;
 
-    public RegionDTO create(RegionDTO dto) {
-
-        if (dto.getId() != null) {
-            throw new RegionAlreadyExsistException("Already exists key");
-        }
+    public Integer create(RegionDTO dto, Integer adminId) {
         RegionEntity entity = new RegionEntity();
-        entity.setNameRu(dto.getRu());
-        entity.setNameUz(dto.getUz());
-        entity.setNameEn(dto.getEng());
+        entity.setNameUz(dto.getNameUz());
+        entity.setNameRu(dto.getNameRU());
+        entity.setNameEng(dto.getNameEng());
         entity.setCreatedDate(LocalDateTime.now());
         entity.setVisible(true);
+        entity.setPrtId(adminId);
+        regionRepository.save(entity); // save profile
 
-        if (dto.getEng() == null || dto.getEng().isBlank()) {
-            throw new AppBadRequestException("Where is English version?");
-        }
-        if (dto.getRu() == null || dto.getRu().isBlank()) {
-            throw new AppBadRequestException("Where is Russian version?");
-        }
-        if (dto.getUz() == null || dto.getUz().isBlank()) {
-            throw new AppBadRequestException("Where is Uzbek version?");
-        }
-        if (dto.getVisible() == null) {
-            throw new AppBadRequestException("Please fill visible icon ?");
-        }
-        regionRepository.save(entity);
         dto.setId(entity.getId());
-        return dto;
+        return entity.getId();
     }
 
-    public boolean update(Integer id, RegionDTO dto) {
+    public Boolean update(Integer id, RegionDTO regionDto) {
         RegionEntity entity = get(id);
-        entity.setVisible(dto.getVisible());
-        entity.setNameEn(dto.getEng());
-        entity.setNameRu(dto.getRu());
-        entity.setNameUz(dto.getUz());
+        entity.setNameUz(regionDto.getNameUz());
+        entity.setNameRu(regionDto.getNameRU());
+        entity.setNameEng(regionDto.getNameEng());
         regionRepository.save(entity);
         return true;
     }
@@ -72,45 +44,44 @@ public class RegionService {
     public RegionEntity get(Integer id) {
         Optional<RegionEntity> optional = regionRepository.findById(id);
         if (optional.isEmpty()) {
-            throw new AppBadRequestException("region not found: " + id);
+            throw new ItemNotFoundException("Item not found: " + id);
         }
         return optional.get();
     }
-    public List<RegionDTO> getAll() {
-        Iterable<RegionEntity> iterable = regionRepository.findAll();
-        List<RegionDTO> dtoList = new LinkedList<>();
 
-        iterable.forEach(entity -> {
-            RegionDTO dto = new RegionDTO();
-           dto.setEng(entity.getNameEn());
-           dto.setRu(entity.getNameRu());
-           dto.setUz(entity.getNameUz());
-           dto.setVisible(entity.getVisible());
-            dtoList.add(dto);
-        });
-        return dtoList;
-    }
-
-    public boolean delete(Integer id) {
-        RegionEntity entity = get(id);
-        regionRepository.delete(entity);
+    public Boolean deleteById(Integer id, Integer prtId) {
+        int effectedRows = regionRepository.updateVisible(id, prtId);
+       /* RegionEntity entity = get(id);
+        entity.setVisible(false);
+        entity.setPrtId(prtId);
+        regionRepository.save(entity);*/
         return true;
     }
 
-    public List<RegionDTO> getByLang(Language lang) {
-        List<RegionEntity> entityList = regionRepository.findAllByVisibleTrue();
-        List<RegionDTO> dtoList = new ArrayList<>();
-        for (RegionEntity entity : entityList) {
-            RegionDTO dto = new RegionDTO();
-            dto.setId(entity.getId());
-            switch (lang) {
-                case name_uz -> dto.setUz(entity.getNameUz());
-                case name_en -> dto.setEng(entity.getNameRu());
-                case name_ru -> dto.setRu(entity.getNameEn());
-            }
-            dtoList.add(dto);
-        }
-        return dtoList;
-    }
+    public Page<RegionDTO> getAll(int page, int size) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
+        Pageable paging = PageRequest.of(page - 1, size, sort);
+        Page<RegionEntity> pageObj = regionRepository.findAll(paging);
 
+        Long totalCount = pageObj.getTotalElements();
+
+        List<RegionEntity> entityList = pageObj.getContent();
+        List<RegionDTO> dtoList = new LinkedList<>();
+
+        if (!pageObj.equals(null)) {
+            for (RegionEntity entity : entityList) {
+                RegionDTO dto = new RegionDTO();
+                dto.setId(entity.getId());
+                dto.setNameUz(entity.getNameUz());
+                dto.setNameRU(entity.getNameRu());
+                dto.setNameEng(entity.getNameEng());
+                dto.setCreatedDate(entity.getCreatedDate());
+                dto.setVisible(entity.getVisible());
+                dtoList.add(dto);
+            }
+            Page<RegionDTO> response = new PageImpl<RegionDTO>(dtoList, paging, totalCount);
+            return response;
+        }
+        throw new ItemNotFoundException("ArticleType is empty");
+    }
 }

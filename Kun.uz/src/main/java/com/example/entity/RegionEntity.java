@@ -1,19 +1,16 @@
 package com.example.entity;
 
-import com.example.enums.GeneralStatus;
-import com.example.enums.Language;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "region")
-@Setter
 @Getter
+@Setter
+@Table(name = "region")
+@Entity
 public class RegionEntity {
-    //        id,name_uz, name_ru, name_en,visible,created_date
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -22,10 +19,11 @@ public class RegionEntity {
     @Column(name = "name_ru")
     private String nameRu;
     @Column(name = "name_eng")
-    private String nameEn;
+    private String nameEng;
     @Column(name = "visible")
-    private Boolean visible = Boolean.TRUE;
+    private Boolean visible;
     @Column(name = "created_date")
-    private LocalDateTime createdDate = LocalDateTime.now();
-
+    private LocalDateTime createdDate;
+    @Column(name = "prt_id")
+    private Integer prtId;
 }

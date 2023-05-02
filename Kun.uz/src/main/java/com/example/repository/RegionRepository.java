@@ -1,15 +1,18 @@
 package com.example.repository;
 
-import com.example.entity.CategoryEntity;
 import com.example.entity.RegionEntity;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 
-import java.util.List;
+public interface RegionRepository extends CrudRepository<RegionEntity, Integer>, PagingAndSortingRepository<RegionEntity, Integer> {
 
-public interface RegionRepository extends CrudRepository<RegionEntity,Integer> {
+    @Transactional
+    @Modifying
+    @Query("update RegionEntity  set visible = false , prtId =:prtId where id =:id")
+    int updateVisible(@Param("id") Integer id, @Param("prtId") Integer prtId);
 
-
-    List<RegionEntity> findAllByVisibleTrue();
 }

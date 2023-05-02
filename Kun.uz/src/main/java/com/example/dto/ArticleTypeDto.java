@@ -4,10 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-
 @Getter
 @Setter
-public class RegionDTO {
+public class ArticleTypeDto {
     private Integer id;
     private String nameUz;
     private String nameRU;

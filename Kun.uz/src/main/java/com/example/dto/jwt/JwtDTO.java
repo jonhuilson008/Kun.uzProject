@@ -1,15 +1,14 @@
-package com.example.dto;
+package com.example.dto.jwt;
 
 import com.example.enums.ProfileRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 @AllArgsConstructor
 public class JwtDTO {
     private Integer id;
     private ProfileRole role;
-
 }

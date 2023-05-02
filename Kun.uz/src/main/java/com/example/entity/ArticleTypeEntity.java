@@ -6,12 +6,11 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "articleType")
-@Setter
 @Getter
+@Setter
+@Table(name = "article_type")
+@Entity
 public class ArticleTypeEntity {
-    //        id,key,name_uz, name_ru, name_en,visible,created_date
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -20,9 +19,11 @@ public class ArticleTypeEntity {
     @Column(name = "name_ru")
     private String nameRu;
     @Column(name = "name_eng")
-    private String nameEn;
-    @Column(name = "visible")
-    private Boolean visible = Boolean.TRUE;
+    private String nameEng;
     @Column(name = "created_date")
-    private LocalDateTime createdDate = LocalDateTime.now();
+    private LocalDateTime createdDate;
+    @Column(name = "visible")
+    private Boolean visible;
+    @Column(name = "prt_id")
+    private Integer prtId;
 }
