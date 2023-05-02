@@ -1,20 +1,12 @@
 package com.example.service;
 
-import com.example.dto.CategoryDTO;
-import com.example.dto.ProfileDTO;
 import com.example.dto.RegionDTO;
-import com.example.entity.CategoryEntity;
 import com.example.entity.RegionEntity;
-import com.example.enums.Language;
+import com.example.enums.LanguageEnum;
 import com.example.exps.AppBadRequestException;
-import com.example.exps.ItemNotFoundException;
 import com.example.exps.RegionAlreadyExsistException;
 import com.example.repository.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -22,8 +14,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-
-import static com.example.enums.Language.*;
 
 @Service
 public class RegionService {
@@ -97,7 +87,7 @@ public class RegionService {
         return true;
     }
 
-    public List<RegionDTO> getByLang(Language lang) {
+    public List<RegionDTO> getByLang(LanguageEnum lang) {
         List<RegionEntity> entityList = regionRepository.findAllByVisibleTrue();
         List<RegionDTO> dtoList = new ArrayList<>();
         for (RegionEntity entity : entityList) {
@@ -113,4 +103,11 @@ public class RegionService {
         return dtoList;
     }
 
+    public Integer getById(Integer regionId, LanguageEnum language) {
+        return null;
+    }
+
+    public RegionEntity getById2(Integer id) {
+        return null;
+    }
 }

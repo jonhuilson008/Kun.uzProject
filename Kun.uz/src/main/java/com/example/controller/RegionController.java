@@ -1,8 +1,7 @@
 package com.example.controller;
 
-import com.example.dto.CategoryDTO;
 import com.example.dto.RegionDTO;
-import com.example.enums.Language;
+import com.example.enums.LanguageEnum;
 import com.example.service.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +25,13 @@ public class RegionController {
     public ResponseEntity<?> update(@PathVariable("id") Integer id, @RequestBody RegionDTO regionDTO) {
         return ResponseEntity.ok(regionService.update(id, regionDTO));
     }
+//     @PutMapping(value = "/admin/update/{id}")
+//    public ResponseEntity<?> update(@PathVariable("id") Integer id, @RequestBody CategoryDTO category) {
+//        return ResponseEntity.ok(categoryService.update(id, category));
+//    }
 
     @GetMapping("/admin/byLang")
-    public ResponseEntity<?> getByLang(@RequestParam Language lang){
+    public ResponseEntity<?> getByLang(@RequestParam LanguageEnum lang){
         List<RegionDTO> response = regionService.getByLang(lang);
         return ResponseEntity.ok(response);
 
@@ -37,6 +40,8 @@ public class RegionController {
     public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(regionService.delete(id));
     }
+
+
     @GetMapping("/admin/list")
     public ResponseEntity<List<RegionDTO>> getAll() {
         List<RegionDTO> list = regionService.getAll();

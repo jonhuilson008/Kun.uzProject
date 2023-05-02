@@ -2,7 +2,7 @@ package com.example.service;
 
 import com.example.dto.ProfileDTO;
 import com.example.entity.ProfileEntity;
-import com.example.enums.GeneralStatus;
+import com.example.enums.GeneralStatusEnum;
 import com.example.repository.ProfileRepository;
 import com.example.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class ProfileService {
         entity.setPassword(MD5Util.getMd5Hash(dto.getPassword())); // MD5 ?
         entity.setCreatedDate(LocalDateTime.now());
         entity.setVisible(true);
-        entity.setStatus(GeneralStatus.ACTIVE);
+        entity.setStatus(GeneralStatusEnum.ACTIVE);
         profileRepository.save(entity); // save profile
 
         dto.setPassword(null);// hide password
@@ -37,5 +37,9 @@ public class ProfileService {
 
     public void isValidProfile(ProfileDTO dto) {
         // throw ... exp
+    }
+
+    public ProfileEntity get(Integer moderId) {
+        return null;
     }
 }

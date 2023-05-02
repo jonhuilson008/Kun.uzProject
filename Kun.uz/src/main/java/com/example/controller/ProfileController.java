@@ -2,7 +2,7 @@ package com.example.controller;
 
 import com.example.dto.JwtDTO;
 import com.example.dto.ProfileDTO;
-import com.example.enums.ProfileRole;
+import com.example.enums.ProfileRoleEnum;
 import com.example.exps.MethodNotAllowedException;
 import com.example.service.ProfileService;
 import com.example.util.JwtUtil;
@@ -24,7 +24,7 @@ public class ProfileController {
         String[] str = authorization.split(" ");
         String jwt = str[1];
         JwtDTO jwtDTO = JwtUtil.decode(jwt);
-        if (!jwtDTO.getRole().equals(ProfileRole.ADMIN)) {
+        if (!jwtDTO.getRole().equals(ProfileRoleEnum.ADMIN)) {
             throw new MethodNotAllowedException("Method not allowed");
         }
         return ResponseEntity.ok(profileService.create(dto, jwtDTO.getId()));

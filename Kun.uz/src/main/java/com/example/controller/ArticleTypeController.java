@@ -1,7 +1,7 @@
 package com.example.controller;
 
-import com.example.dto.ArticleTypeDTO;
-import com.example.enums.Language;
+import com.example.dto.article.ArticleTypeDTO;
+import com.example.enums.LanguageEnum;
 import com.example.service.ArticleTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,7 @@ public class ArticleTypeController {
     }
 
     @GetMapping("/admin/byLang")
-    public ResponseEntity<?> getByLang(@RequestParam Language lang){
+    public ResponseEntity<?> getByLang(@RequestParam LanguageEnum lang){
         List<ArticleTypeDTO> response = articleTypeService.getByLang(lang);
         return ResponseEntity.ok(response);
 

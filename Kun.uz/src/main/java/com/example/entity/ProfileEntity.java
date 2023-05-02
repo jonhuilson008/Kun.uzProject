@@ -1,7 +1,7 @@
 package com.example.entity;
 
-import com.example.enums.GeneralStatus;
-import com.example.enums.ProfileRole;
+import com.example.enums.GeneralStatusEnum;
+import com.example.enums.ProfileRoleEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,10 +28,10 @@ public class ProfileEntity {
     private String password;
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private GeneralStatus status;
+    private GeneralStatusEnum status;
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private ProfileRole role;
+    private ProfileRoleEnum role;
     @Column(name = "visible")
     private Boolean visible = Boolean.TRUE;
     @Column(name = "created_date")

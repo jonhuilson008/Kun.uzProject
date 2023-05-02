@@ -1,18 +1,16 @@
-package com.example.dto;
+package com.example.dto.register;
 
-import com.example.enums.ProfileRoleEnum;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ProfileDTO {
-    private Integer id;
+@AllArgsConstructor
+public class RegistrationDTO {
     private String name;
     private String surname;
     private String email;
     private String phone;
     private String password;
-    private ProfileRoleEnum role;
-
 }

@@ -1,14 +1,13 @@
 package com.example.service;
 
-import com.example.dto.ArticleTypeDTO;
+import com.example.dto.article.ArticleTypeDTO;
 
 
 import com.example.entity.ArticleTypeEntity;
-import com.example.enums.Language;
+import com.example.enums.LanguageEnum;
 import com.example.exps.AppBadRequestException;
 import com.example.exps.RegionAlreadyExsistException;
 import com.example.repository.ArticleTypeRepository;
-import com.example.repository.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,7 +50,7 @@ public class ArticleTypeService {
     }
 
 
-    public List<ArticleTypeDTO> getByLang(Language lang) {
+    public List<ArticleTypeDTO> getByLang(LanguageEnum lang) {
 
         return null;
     }

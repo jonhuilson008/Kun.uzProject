@@ -1,8 +1,33 @@
-### Login
-POST localhost:8080/api/v1/auth
-Content-Type:  application/json
+### Registration
+POST http://localhost:8080/auth/registration
+Content-Type: application/json
 
 {
-  "email": "admin2@mail.ru",
-  "password": "456123"
+  "name": "knkjjjjjjj ",
+  "surname": "",
+  "phone": "1555523",
+  "password": "88888",
+  "email": "jjjjjjjjjjj@gmail.com"
+}
+
+
+
+
+### Authorization user
+POST localhost:8080/auth/login
+Content-Type: application/json
+Accept-Language: RU
+
+{
+  "phone": "+998943943433",
+  "password": "3433"
+}
+
+### Authorization Admin
+POST localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "phone": "0000",
+  "password": "0000"
 }

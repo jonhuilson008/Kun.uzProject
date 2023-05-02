@@ -2,7 +2,7 @@ package com.example.service;
 
 import com.example.dto.CategoryDTO;
 import com.example.entity.CategoryEntity;
-import com.example.enums.Language;
+import com.example.enums.LanguageEnum;
 import com.example.exps.AppBadRequestException;
 import com.example.exps.RegionAlreadyExsistException;
 import com.example.repository.CategoryRepository;
@@ -49,7 +49,7 @@ public class CategoryService {
     }
 
 
-    public List<CategoryDTO> getByLang(Language lang) {
+    public List<CategoryDTO> getByLang(LanguageEnum lang) {
 
         return null;
     }
@@ -91,5 +91,14 @@ public class CategoryService {
         CategoryEntity entity = get(id);
         categoryRepository.delete(entity);
         return true;
+    }
+
+
+    public Object getById(Integer categoryId, LanguageEnum language) {
+        return null;
+    }
+
+    public Integer get1(Integer categoryId, LanguageEnum language) {
+        return null;
     }
 }

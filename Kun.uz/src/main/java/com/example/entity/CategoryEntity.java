@@ -1,6 +1,5 @@
 package com.example.entity;
 
-import com.example.enums.Language;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

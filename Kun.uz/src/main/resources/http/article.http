@@ -1,0 +1,82 @@
+### create article
+POST http://localhost:8080/article/moderator/create
+Content-Type: application/json
+
+{
+  "title": "holly",
+  "description": "bla",
+  "content": "🤨",
+  "regionId": 3,
+  "category_id": 3
+}
+
+### update
+PUT http://localhost:8080/article/moderator/update?id=3a6813fc-2df9-4ba7-b3fa-9d73c0382d29
+Content-Type: application/json
+
+{
+  "title": "kurs",
+  "description": "mazgi ",
+  "content": "2345",
+  "regionId": 1,
+  "status": "PUBLISHED",
+  "category_id": 1
+}
+
+### delete
+DELETE http://localhost:8080/article/delete?id=3a6813fc-2df9-4ba7-b3fa-9d73c0382d29
+
+
+### status
+PUT http://localhost:8080/article/status?id=3a6813fc-2df9-4ba7-b3fa-9d73c0382d29&status=PUBLISHED
+
+
+###  last five
+GET http://localhost:8080/article/last?status=PUBLISHED
+
+
+
+
+### last eight
+POST http://localhost:8080/article/last_eight
+Content-Type: application/json
+
+[
+  "3c790082-7df7-433f-91c0-937f2a340338",
+  "adfc9211-0d4e-484f-ae27-40d97eabf570",
+  "b7047c29-4d01-47eb-8913-de5b1608b5b2"
+]
+
+
+###  8 article
+GET http://localhost:8080/article/ecc7102d-eb09-4c9f-85eb-d05e361eab75
+Accept-Language: RU
+
+###  get las four
+GET http://localhost:8080/article/last_four/90ef4fea-5203-491e-8f03-ae2f910d848f
+
+
+
+###  most reads view count max limit 4
+GET http://localhost:8080/article/most_reads
+
+### last 5 region id
+GET http://localhost:8080/article/get_five/region/dfffffffffff
+
+
+### page article region id
+GET http://localhost:8080/article/get_five/region/page?page=0&size=1&id=dfffffffffff
+
+
+###  last 5  category id
+GET http://localhost:8080/article/get_five/category/7777777
+
+### page article category id
+GET http://localhost:8080/article/get_five/category/page?page=0&size=1&id=7777777
+
+
+### view Count
+GET http://localhost:8080/article/view_count/e5c58f13-e0ba-4039-b563-af89e4cbff2a
+
+### share count
+GET http://localhost:8080/article/share_count/e5c58f13-e0ba-4039-b563-af89e4cbff2a

@@ -6,23 +6,18 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "region")
-@Setter
 @Getter
-public class RegionEntity {
+@Setter
+@Entity
+@Table(name = "email")
+public class EmailEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "name_uz")
-    private String nameUz;
-    @Column(name = "name_ru")
-    private String nameRu;
-    @Column(name = "name_eng")
-    private String nameEn;
-    @Column(name = "visible")
-    private Boolean visible = Boolean.TRUE;
+    @Column
+    private String message;
+    @Column
+    private String email;
     @Column(name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();
-
 }
