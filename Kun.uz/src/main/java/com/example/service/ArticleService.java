@@ -129,4 +129,8 @@ public class ArticleService {
         }
         return optional.get();
     }
+
+    public ArticleRequestDTO getArticleShortInfo(String articleId) {
+        return null;
+    }
 }
