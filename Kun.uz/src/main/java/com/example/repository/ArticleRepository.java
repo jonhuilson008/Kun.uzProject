@@ -28,9 +28,9 @@ public interface ArticleRepository extends CrudRepository<ArticleEntity, String>
                                                                                   ArticleStatus status,
                                                                                   Boolean visible);
 
-    @Query("SELECT new ArticleEntity(id,title,description,attachId,publishedDate) From ArticleEntity where status =:status and visible = true and typeId =:typeId order by createdDate desc limit 5")
-    List<ArticleEntity> find5ByTypeId(@Param("typeId") Integer typeId, @Param("status") ArticleStatus status);
-
+//    @Query(value = "SELECT new ArticleEntity(id,title,description,attachId,publishedDate) From ArticleEntity where status =:status and visible = true and typeId =:typeId order by createdDate desc limit 5")
+//    List<ArticleEntity> find5ByTypeId(@Param("typeId") Integer typeId, @Param("status") ArticleStatus status);
+//
 
     @Query(value = "SELECT a.id,a.title,a.description,a.attach_id,a.published_date " +
             " FROM article AS a  where  a.type_id =:typeId and status =:status order by created_date desc Limit :limit",
